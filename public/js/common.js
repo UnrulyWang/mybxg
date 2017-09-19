@@ -1,4 +1,4 @@
-define(['jquery','cookie'],function($){
+define(['jquery','template','cookie'],function($,template){
 	//NProgress.start();
     //
 	//NProgress.done();
@@ -23,12 +23,15 @@ define(['jquery','cookie'],function($){
 //验证用户是否dengl陆
 	var flag=$.cookie('PHPSESSID');
 	console.log(flag);
-	if(!flag){
+	if(!flag && location.pathname!='/main/login'){
 		location.href='/main/login';
 	}
 	var loginInfo=$.cookie('loginInfo');
 	loginInfo=loginInfo&&JSON.parse(loginInfo);
-	$('.aside .profile img').attr('src',loginInfo.tc_avatar);
-	$('.aside .profile h4').html(loginInfo.tc_name);
+	var tpl='<div class="avatar img-circle"><img src="{{tc_avatar}}"></div> <h4>{{tc_name}}</h4>';
+	var html=template.render(tpl,loginInfo);
+	$('.aside .profile').html(html);
+	//$('.aside .profile img').attr('src',loginInfo.tc_avatar);
+	//$('.aside .profile h4').html(loginInfo.tc_name);
 });
 
