@@ -6,7 +6,7 @@ define(['jquery','template','cookie'],function($,template){
 	//$('.navs ul').prev('a').on('click', function () {
 	//	$(this).next().slideToggle();
 	//});
-//退出按钮
+//鐐瑰嚮鎺ㄥ嚭
 	$('#logoutBtn').on('click',function(){
 		console.log(1);
 		$.ajax({
@@ -20,7 +20,7 @@ define(['jquery','template','cookie'],function($,template){
 			}
 		})
 	});
-//验证用户是否dengl陆
+//鏍规嵁sessionid浼犳潵鐨勫�兼潵閰嶇疆澶村儚
 	var flag=$.cookie('PHPSESSID');
 	console.log(flag);
 	if(!flag && location.pathname!='/main/login'){

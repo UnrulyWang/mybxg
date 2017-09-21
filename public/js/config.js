@@ -6,9 +6,22 @@ require.config({
     paths:{
         jquery: 'jquery/jquery.min',
         template:'artTemplate/template-web',
+        bootstrap:'bootstrap/js/bootstrap',
+        datepicker:'bootstrap-datepicker/js/bootstrap-datepicker',
+        language:'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
         common: '../js/common',
         cookie: 'jquery-cookie/jquery.cookie',
         login: '../js/login',
-        teacherList: '../js/teacherList'
+        teacherList: '../js/teacherList',
+        teacherAdd: '../js/teacherAdd',
+        util: '../js/util'
+    },
+    shim:{
+        bootstrap:{
+            deps:['jquery']
+        },
+        language:{
+            deps:['jquery','datepicker']
+        }
     }
 });
