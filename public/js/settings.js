@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/22.
  */
-define(['jquery','template','ckeditor','uploadFile','region','datepiker','language'],function($,template,CKEDITOR){
+define(['jquery','template','ckeditor','uploadFile','region','datepicker','language','validate','form'],function($,template,CKEDITOR){
     $.ajax({
         url:'/api/teacher/profile',
         dataType:'json',
@@ -52,6 +52,35 @@ define(['jquery','template','ckeditor','uploadFile','region','datepiker','langua
                             { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
                             { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] }
                         ]
+                    })
+                    //处理表单提交
+                    $('#settingForm').validate({
+                        sendForm:false,
+                        valid:function(){
+                            //上传的户籍信息拼接
+                            var homeTown='';
+                            var p=$('#p').find('option:selected').text();
+                           var c= $('#c').find('option:selected').text();
+                            var d=$('#d').find('option:selected').text();
+                            homeTown=p+'|'+c+'|'+d;
+                            //更新富文本内容
+                            for(var instance in CKEDITOR.instances){
+                                CKEDITOR.instances[instance].updateElement();
+                            }
+                            //这是提交表单
+                            $(this).ajaxSubmit({
+                                url:'/api/teacher/modify',
+                                dataType:'json',
+                                type:'post',
+                                data:{tc_hometown:homeTown},
+                                success:function(data){
+                                    console.log(data);
+                                    if(data.code==200){
+                                        location.reload();
+                                    }
+                                }
+                            });
+                        }
                     })
                 }
         }
