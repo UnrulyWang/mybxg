@@ -11,6 +11,8 @@ require.config({
         language:'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
         validate: 'validate/jquery-validate.min',
         form: 'jquery-form/jquery.form',
+        uploadFile:'uploadFile/jquery.uploadify.min',
+        region:'jquery-region/jquery.region',
         common: '../js/common',
         cookie: 'jquery-cookie/jquery.cookie',
         login: '../js/login',
@@ -27,6 +29,9 @@ require.config({
             deps:['jquery','datepicker']
         },
         validate:{
+            deps:['jquery']
+        },
+        uploadFile:{
             deps:['jquery']
         }
     }
