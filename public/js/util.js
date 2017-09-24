@@ -18,6 +18,9 @@ define(['jquery'],function($){
                 });
             }
             return teacherId;
+        },
+        getLightHigh : function(path){
+            $('.aside .navs a[href="'+path+'"]').addClass('active').closest('ul').show();
         }
     }
 });

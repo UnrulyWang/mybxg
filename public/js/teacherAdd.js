@@ -2,8 +2,9 @@
  * Created by Administrator on 2017/9/21.
  */
 define(['jquery','util','template','bootstrap','datepicker','language','validate','form'],function($,util,template){
+    util.getLightHigh('/teacher/list');
     var teacherId=(util.getId('tc_id'));
-    //�༭����
+    //编辑
     if(teacherId){
         $.ajax({
             type:'get',
@@ -21,7 +22,7 @@ define(['jquery','util','template','bootstrap','datepicker','language','validate
             }
         })
     }
-    //��Ӳ���
+    //添加
     else{
         var html=template('teacherTpl',{});
         $('#teacherInfo').html(html);

@@ -7,6 +7,12 @@ define(['jquery','template','cookie'],function($,template){
 	//	$(this).next().slideToggle();
 	//});
 //点击推出
+
+	$('.aside .navs li a[href="javascript:;"]').on('click',function(){
+		console.log(1);
+		$('.aside .navs li a + ul').slideToggle();
+	})
+
 	$('#logoutBtn').on('click',function(){
 		console.log(1);
 		$.ajax({
@@ -34,4 +40,5 @@ define(['jquery','template','cookie'],function($,template){
 	//$('.aside .profile img').attr('src',loginInfo.tc_avatar);
 	//$('.aside .profile h4').html(loginInfo.tc_name);
 });
+
 

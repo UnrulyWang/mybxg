@@ -4,8 +4,9 @@
 /**
  * Created by Administrator on 2017/9/19.
  */
-define(['jquery','template','bootstrap'],function($,template){
+define(['jquery','template','util','bootstrap'],function($,template,util){
     //调用后台接口来获取老师数据
+    util.getLightHigh(location.pathname);
     $.ajax({
         type:'get',
         url:'/api/teacher',

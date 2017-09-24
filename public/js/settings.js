@@ -1,7 +1,8 @@
 /**
  * Created by Administrator on 2017/9/22.
  */
-define(['jquery','template','ckeditor','uploadFile','region','datepicker','language','validate','form'],function($,template,CKEDITOR){
+define(['jquery','template','ckeditor','util','uploadFile','region','datepicker','language','validate','form'],function($,template,CKEDITOR,util){
+    util.getLightHigh('/teacher/list');
     $.ajax({
         url:'/api/teacher/profile',
         dataType:'json',
