@@ -13,6 +13,7 @@ require.config({
         form: 'jquery-form/jquery.form',
         uploadFile:'uploadFile/jquery.uploadify.min',
         region:'jquery-region/jquery.region',
+        ckeditor:'ckeditor/ckeditor',
         common: '../js/common',
         cookie: 'jquery-cookie/jquery.cookie',
         login: '../js/login',
@@ -33,6 +34,9 @@ require.config({
         },
         uploadFile:{
             deps:['jquery']
+        },
+        ckeditor:{
+            exports:'CKEDITOR'
         }
     }
 });

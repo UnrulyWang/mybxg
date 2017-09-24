@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/9/22.
  */
-define(['jquery','template','uploadFile','region'],function($,template,region){
+define(['jquery','template','ckeditor','uploadFile','region','datepiker','language'],function($,template,CKEDITOR){
     $.ajax({
         url:'/api/teacher/profile',
         dataType:'json',
@@ -40,12 +40,18 @@ define(['jquery','template','uploadFile','region'],function($,template,region){
                             $(".preview img").attr('src',obj.result.path);
 
                         }
-                    })
-
+                    });
                     //三级联动
                     $('#pcd').region({
                         url:'/public/assets/jquery-region/region.json'
 
+                    })
+                    //处理富文本
+                    CKEDITOR.replace('editor',{
+                        toolbarGroups : [
+                            { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] }
+                        ]
                     })
                 }
         }
