@@ -16,6 +16,7 @@ require.config({
         ckeditor:'ckeditor/ckeditor',
         common: '../js/common',
         cookie: 'jquery-cookie/jquery.cookie',
+        jcrop:'jcrop/js/Jcrop',
         login: '../js/login',
         teacherList: '../js/teacherList',
         teacherAdd: '../js/teacherAdd',
@@ -25,7 +26,8 @@ require.config({
         courselist:'../js/courselist',
         courseadd:'../js/courseadd',
         coursebasic:'../js/coursebasic',
-        coursepicture:'../js/coursepicture'
+        coursepicture:'../js/coursepicture',
+        courselesson:'../js/courselesson'
     },
     shim:{
         bootstrap:{
@@ -42,6 +44,9 @@ require.config({
         },
         ckeditor:{
             exports:'CKEDITOR'
+        },
+        jcrop:{
+            deps:['jquery']
         }
     }
 });

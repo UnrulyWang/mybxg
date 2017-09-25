@@ -30,7 +30,7 @@ define(['jquery','template','util','validate','form'],function($,template,util){
                 //获取一级分类id
               var pid=$(this).val();
                 console.log(pid);
-                //根据一级分类id 查询所欲的二级分类数据
+                //根据一级分类id 查询所欲、的二级分类数据
                 $.ajax({
                     type:'get',
                     url:'/api/category/child',
