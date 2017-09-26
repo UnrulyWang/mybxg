@@ -18,6 +18,9 @@ define(['jquery','template','util','uploadFile','jcrop','form'],function($,templ
             if(data.code==200){
                 var html=template('picTpl',data.result);
                 $('#picInfo').html(html);
+                //选中图片
+                var img= $('.preview img');
+                var  nowCrop=null;//保证裁切实例的唯一性
                 //处理图片上传操作
                 $('#myfile').uploadify({
                     width:80,
@@ -33,13 +36,13 @@ define(['jquery','template','util','uploadFile','jcrop','form'],function($,templ
                         console.log(b);
                         var obj = JSON.parse(b);
                         $(".preview img").attr('src',obj.result.path);
+                        cropImage();
+                        $('#cropBtn').text('保存图片').attr('data-flag',true)
 
                     }
                 });
-                //选中图片
-                var img= $('.preview img');
                 //处理裁切功能
-                $('#cropBtn').click(function(){
+                 $('#cropBtn').click(function(){
                     var flag=$(this).attr('data-flag');
                     //装备是保存图片
                     if(flag){
@@ -66,8 +69,12 @@ define(['jquery','template','util','uploadFile','jcrop','form'],function($,templ
                 function cropImage(){
                     img.Jcrop({
                         aspectRatio: 2,
+                        boxWidth:400
                         //setSelect:[100,100,200,100]
                     },function(){
+                        //第一次调用没有nowCrop
+                       nowCrop && nowCrop.destroy();
+                        nowCrop=this;
                         //显示缩略图 控制缩略图的宽高以及显示位置
                         this.initComponent('Thumbnailer',{width : 240,height : 120,mythumb:'.thumb'});
                         $('.jcrop-thumb').css({
@@ -88,17 +95,19 @@ define(['jquery','template','util','uploadFile','jcrop','form'],function($,templ
                         ////创建一个选取区
                         this.newSelection();
                         this.setSelect([x,y,w,h]);
+                        //监控选取的变化
+                        img.parent().on('cropstart cropmove cropend',function(a,b,c){
+                            console.log(1);
+                            console.log(c);
+                            //选取完成之后把对应得坐标数据填充到表单里
+                            var ainput=$('#cropForm input');
+                            ainput.eq(0).val(c.x);
+                            ainput.eq(1).val(c.y);
+                            ainput.eq(2).val(c.w);
+                            ainput.eq(3).val(c.h);
+                        });
                     });
-                    //监控选取的变化
-                    img.parent().on('cropstart cropmove cropend',function(a,b,c){
-                        console.log(c);
-                        //选取完成之后把对应得坐标数据填充到表单里
-                        var ainput=$('#cropForm input');
-                        ainput.eq(0).val(c.x);
-                        ainput.eq(1).val(c.y);
-                        ainput.eq(2).val(c.w);
-                        ainput.eq(3).val(c.h);
-                    });
+
                 }
 
             }
